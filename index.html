@@ -371,7 +371,182 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = "https://xsdqzzixbdktikltqpde.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xNIsPALwR4c-1XCJngRleQ_rpw4-Uuf";
 
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+let currentFilter = "All";
+
+function openModal() {
+  document.getElementById("modal").style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+function generateAnonymousId() {
+  return "Anonymous #" + Math.floor(1000 + Math.random() * 9000);
+}
+
+async function renderPosts() {
+  const container = document.getElementById("posts");
+
+  let query = supabaseClient
+    .from("posts")
+    .select("*")
+    .eq("status", "published")
+    .order("created_at", { ascending: false });
+
+  if (currentFilter !== "All") {
+    query = query.eq("category", currentFilter);
+  }
+
+  const { data: posts, error } = await query;
+
+  if (error) {
+    console.error(error);
+    container.innerHTML =
+      '<div class="empty">Unable to load stories.</div>';
+    return;
+  }
+
+  if (!posts || posts.length === 0) {
+    container.innerHTML =
+      '<div class="empty">No stories here yet.</div>';
+    return;
+  }
+
+  container.innerHTML = posts.map(post => `
+    <article class="post">
+
+      <div class="anonymous">
+        ◦ ${escapeHTML(post.anonymous || "Anonymous")}
+      </div>
+
+      <div class="post-text">
+        ${escapeHTML(post.text || "")}
+      </div>
+
+      <span class="category">
+        ${escapeHTML(post.category || "Random")}
+      </span>
+
+      <div class="actions">
+
+        <button
+          class="action-btn"
+          onclick="supportPost('${post.id}')">
+          ♡ Support
+        </button>
+
+        <button
+          class="action-btn"
+          onclick="reportPost('${post.id}')">
+          ⚑ Report
+        </button>
+
+      </div>
+
+    </article>
+  `).join("");
+}
+
+async function submitStory() {
+  const story = document.getElementById("story").value.trim();
+  const category = document.getElementById("category").value;
+
+  if (story.length < 10) {
+    alert("Please write a little more before posting.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("posts")
+    .insert({
+      text: story,
+      category: category,
+      anonymous: generateAnonymousId(),
+      status: "published"
+    });
+
+  if (error) {
+    console.error(error);
+    alert("Something went wrong. Please try again.");
+    return;
+  }
+
+  document.getElementById("story").value = "";
+  closeModal();
+
+  alert("Your story has been posted anonymously.");
+
+  renderPosts();
+}
+
+function supportPost(id) {
+  alert("♡ Your support was sent anonymously.");
+}
+
+async function reportPost(id) {
+  const reason = prompt(
+    "Why are you reporting this story?\n\n" +
+    "1. Spam\n" +
+    "2. Harassment\n" +
+    "3. Personal information\n" +
+    "4. Inappropriate content\n" +
+    "5. Other"
+  );
+
+  if (!reason) return;
+
+  const { error } = await supabaseClient
+    .from("posts")
+    .update({ report: reason })
+    .eq("id", id);
+
+  if (error) {
+    console.error(error);
+    alert("Unable to submit report.");
+    return;
+  }
+
+  alert("Thank you. Your report has been recorded.");
+}
+
+function filterPosts(category, button) {
+  currentFilter = category;
+
+  document
+    .querySelectorAll(".filter")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+  renderPosts();
+}
+
+function escapeHTML(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById("modal");
+
+  if (event.target === modal) {
+    closeModal();
+  }
+};
+
+renderPosts();
 </script>
 
 </body>
