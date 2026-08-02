@@ -469,7 +469,7 @@ async function submitStory() {
 
   const { error } = await supabaseClient
     .from("posts")
-  .insert({
+.insert({
   content: story,
   text: story,
   category: category,
