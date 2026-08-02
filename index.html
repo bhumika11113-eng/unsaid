@@ -540,21 +540,50 @@
 
   }
 
-  function submitStory() {
+  async function submitStory() {
 
-    const story =
-      document.getElementById("story").value.trim();
+  const story =
+    document.getElementById("story").value.trim();
 
-    const category =
-      document.getElementById("category").value;
+  const category =
+    document.getElementById("category").value;
 
-    if (story.length < 10) {
+  if (story.length < 10) {
+    alert("Please write a little more before posting.");
+    return;
+  }
 
-      alert("Please write a little more before posting.");
+  if (story.length > 3000) {
+    alert("Your story is too long.");
+    return;
+  }
 
-      return;
+  const newPost = {
+    anonymous: generateAnonymousId(),
+    category: category,
+    text: story,
+    status: "published",
+    report: 0
+  };
 
-    }
+  const { error } = await supabaseClient
+    .from("posts")
+    .insert([newPost]);
+
+  if (error) {
+    console.error("Error posting story:", error);
+    alert("Something went wrong. Please try again.");
+    return;
+  }
+
+  document.getElementById("story").value = "";
+
+  closeModal();
+
+  alert("Your story has been posted anonymously.");
+
+  renderPosts();
+}
 
     if (story.length > 3000) {
 
