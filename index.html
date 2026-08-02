@@ -469,12 +469,13 @@ async function submitStory() {
 
   const { error } = await supabaseClient
     .from("posts")
-    .insert({
-      text: story,
-      category: category,
-      anonymous: generateAnonymousId(),
-      status: "published"
-    });
+  .insert({
+  content: story,
+  text: story,
+  category: category,
+  anonymous: generateAnonymousId(),
+  status: "published"
+});
 
   if (error) {
     console.error(error);
