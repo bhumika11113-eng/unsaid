@@ -425,20 +425,73 @@
 
   }
 
-  function renderPosts() {
+  async function renderPosts() {
 
-    const container = document.getElementById("posts");
+  const container = document.getElementById("posts");
 
-    let posts =
-      JSON.parse(localStorage.getItem("unsaid_posts")) || demoPosts;
+  const { data, error } = await supabaseClient
+    .from("posts")
+    .select("*")
+    .eq("status", "published")
+    .order("created_at", { ascending: false });
 
-    if (currentFilter !== "All") {
+  if (error) {
+    console.error("Error loading posts:", error);
+    container.innerHTML =
+      '<div class="empty">Unable to load stories right now.</div>';
+    return;
+  }
 
-      posts = posts.filter(
-        post => post.category === currentFilter
-      );
+  let posts = data || [];
 
-    }
+  if (currentFilter !== "All") {
+    posts = posts.filter(
+      post => post.category === currentFilter
+    );
+  }
+
+  if (posts.length === 0) {
+    container.innerHTML =
+      '<div class="empty">No stories here yet.</div>';
+    return;
+  }
+
+  container.innerHTML = posts.map(post => `
+
+    <article class="post">
+
+      <div class="anonymous">
+        ◦ ${escapeHTML(post.anonymous || "Anonymous")}
+      </div>
+
+      <div class="post-text">
+        ${escapeHTML(post.text || post.content || "")}
+      </div>
+
+      <span class="category">
+        ${escapeHTML(post.category || "Random")}
+      </span>
+
+      <div class="actions">
+
+        <button
+          class="action-btn"
+          onclick="supportPost(${post.id})">
+          ♡ Support
+        </button>
+
+        <button
+          class="action-btn"
+          onclick="reportPost(${post.id})">
+          ⚑ Report
+        </button>
+
+      </div>
+
+    </article>
+
+  `).join("");
+}
 
     if (posts.length === 0) {
 
