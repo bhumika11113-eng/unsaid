@@ -426,14 +426,19 @@
   }
 
   async function renderPosts() {
-
   const container = document.getElementById("posts");
 
-  const { data, error } = await supabaseClient
+  let query = supabaseClient
     .from("posts")
     .select("*")
     .eq("status", "published")
     .order("created_at", { ascending: false });
+
+  if (currentFilter !== "All") {
+    query = query.eq("category", currentFilter);
+  }
+
+  const { data: posts, error } = await query;
 
   if (error) {
     console.error("Error loading posts:", error);
@@ -442,22 +447,13 @@
     return;
   }
 
-  let posts = data || [];
-
-  if (currentFilter !== "All") {
-    posts = posts.filter(
-      post => post.category === currentFilter
-    );
-  }
-
-  if (posts.length === 0) {
+  if (!posts || posts.length === 0) {
     container.innerHTML =
       '<div class="empty">No stories here yet.</div>';
     return;
   }
 
   container.innerHTML = posts.map(post => `
-
     <article class="post">
 
       <div class="anonymous">
@@ -469,76 +465,28 @@
       </div>
 
       <span class="category">
-        ${escapeHTML(post.category || "Random")}
+        ${escapeHTML(post.category || "Life")}
       </span>
 
       <div class="actions">
 
         <button
           class="action-btn"
-          onclick="supportPost(${post.id})">
+          onclick="supportPost('${post.id}')">
           ♡ Support
         </button>
 
         <button
           class="action-btn"
-          onclick="reportPost(${post.id})">
+          onclick="reportPost('${post.id}')">
           ⚑ Report
         </button>
 
       </div>
 
     </article>
-
   `).join("");
 }
-
-    if (posts.length === 0) {
-
-      container.innerHTML =
-        '<div class="empty">No stories here yet.</div>';
-
-      return;
-
-    }
-
-    container.innerHTML = posts.map(post => `
-
-      <article class="post">
-
-        <div class="anonymous">
-          ◦ ${escapeHTML(post.anonymous)}
-        </div>
-
-        <div class="post-text">
-          ${escapeHTML(post.text)}
-        </div>
-
-        <span class="category">
-          ${escapeHTML(post.category)}
-        </span>
-
-        <div class="actions">
-
-          <button
-            class="action-btn"
-            onclick="supportPost(${post.id})">
-            ♡ Support
-          </button>
-
-          <button
-            class="action-btn"
-            onclick="reportPost(${post.id})">
-            ⚑ Report
-          </button>
-
-        </div>
-
-      </article>
-
-    `).join("");
-
-  }
 
   async function submitStory() {
 
