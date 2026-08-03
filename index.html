@@ -1,432 +1,517 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
   <title>spillithere — Say It Without A Name</title>
 
   <style>
     * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-:root {
-  --cream: #fffaf7;
-  --white: #ffffff;
-  --blush: #f7dce5;
-  --pink: #e5a1b5;
-  --pink-dark: #c87891;
-  --beige: #eee2d5;
-  --brown: #4a3840;
-  --muted: #8d747d;
-  --border: #eedde3;
-}
+    :root {
+      --cream: #fffaf7;
+      --white: #ffffff;
+      --blush: #f7dce5;
+      --pink: #e5a1b5;
+      --pink-dark: #c87891;
+      --beige: #eee2d5;
+      --brown: #4a3840;
+      --muted: #8d747d;
+      --border: #eedde3;
+    }
 
-body {
-  font-family: "DM Sans", sans-serif;
-  background: var(--cream);
-  color: var(--brown);
-  min-height: 100vh;
-}
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      min-height: 100vh;
+    }
 
-/* HEADER */
+    header {
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
 
-header {
-  background: rgba(255, 255, 255, 0.94);
-  border-bottom: 1px solid var(--border);
-  padding: 18px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  backdrop-filter: blur(10px);
-}
+    .logo {
+      font-family: "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: var(--brown);
+    }
 
-.logo {
-  font-family: "Playfair Display", serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  color: var(--brown);
-}
+    .tagline {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.2px;
+    }
 
-.tagline {
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 4px;
-  letter-spacing: 0.2px;
-}
+    .write-btn {
+      border: none;
+      background: var(--pink);
+      color: white;
+      padding: 11px 19px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 5px 15px rgba(201, 120, 145, 0.18);
+      transition: 0.2s ease;
+    }
 
-/* WRITE BUTTON */
+    .write-btn:hover {
+      background: var(--pink-dark);
+      transform: translateY(-2px);
+    }
 
-.write-btn {
-  border: none;
-  background: var(--pink);
-  color: white;
-  padding: 11px 19px;
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: 600;
-  box-shadow: 0 5px 15px rgba(201, 120, 145, 0.18);
-  transition: 0.2s ease;
-}
+    .hero {
+      text-align: center;
+      padding: 85px 20px 55px;
+      position: relative;
+    }
 
-.write-btn:hover {
-  background: var(--pink-dark);
-  transform: translateY(-2px);
-}
+    .hero::before {
+      content: "˚₊‧♡ ✧";
+      display: block;
+      font-size: 20px;
+      color: var(--pink);
+      margin-bottom: 18px;
+    }
 
-/* HERO */
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+      color: var(--brown);
+    }
 
-.hero {
-  text-align: center;
-  padding: 85px 20px 55px;
-  position: relative;
-}
+    .hero p {
+      max-width: 590px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
-.hero::before {
-  content: "˚₊‧♡ ✧";
-  display: block;
-  font-size: 20px;
-  color: var(--pink);
-  margin-bottom: 18px;
-}
+    .main {
+      max-width: 850px;
+      margin: auto;
+      padding: 20px;
+    }
 
-.hero h1 {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(42px, 7vw, 72px);
-  line-height: 1.05;
-  letter-spacing: -2px;
-  margin-bottom: 18px;
-  color: var(--brown);
-}
+    .section-title {
+      margin: 25px 0 15px;
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      color: var(--brown);
+    }
 
-.hero p {
-  max-width: 590px;
-  margin: auto;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.7;
-}
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+    }
 
-/* MAIN */
+    .filter {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--brown);
+      padding: 9px 15px;
+      border-radius: 25px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.2s ease;
+    }
 
-.main {
-  max-width: 850px;
-  margin: auto;
-  padding: 20px;
-}
+    .filter:hover {
+      background: var(--blush);
+    }
 
-.section-title {
-  margin: 25px 0 15px;
-  font-family: "Playfair Display", serif;
-  font-size: 24px;
-  color: var(--brown);
-}
+    .filter.active {
+      background: var(--pink);
+      color: white;
+      border-color: var(--pink);
+    }
 
-/* FILTERS */
+    .post {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 27px;
+      margin: 18px 0;
+      box-shadow: 0 10px 30px rgba(74, 56, 64, 0.06);
+      transition: 0.2s ease;
+    }
 
-.filters {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 12px;
-}
+    .post:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 35px rgba(201, 120, 145, 0.10);
+    }
 
-.filter {
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--brown);
-  padding: 9px 15px;
-  border-radius: 25px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: 0.2s ease;
-}
+    .anonymous {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 13px;
+    }
 
-.filter:hover {
-  background: var(--blush);
-}
+    .post-text {
+      font-size: 16px;
+      line-height: 1.8;
+      white-space: pre-wrap;
+      color: var(--brown);
+    }
 
-.filter.active {
-  background: var(--pink);
-  color: white;
-  border-color: var(--pink);
-}
+    .category {
+      display: inline-block;
+      margin-top: 18px;
+      background: var(--blush);
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--pink-dark);
+      font-weight: 600;
+    }
 
-/* STORY CARDS */
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
 
-.post {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 27px;
-  margin: 18px 0;
-  box-shadow: 0 10px 30px rgba(74, 56, 64, 0.06);
-  transition: 0.2s ease;
-}
+    .action-btn {
+      border: 1px solid var(--border);
+      background: var(--white);
+      color: var(--brown);
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
 
-.post:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 35px rgba(201, 120, 145, 0.10);
-}
+    .action-btn:hover {
+      background: var(--blush);
+      border-color: var(--pink);
+      color: var(--pink-dark);
+    }
 
-.anonymous {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 13px;
-}
+    /* MODAL */
 
-.post-text {
-  font-size: 16px;
-  line-height: 1.8;
-  white-space: pre-wrap;
-  color: var(--brown);
-}
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(74, 56, 64, 0.42);
+      z-index: 100;
+      padding: 20px;
+      overflow-y: auto;
+    }
 
-/* CATEGORY */
+    .modal {
+      background: var(--white);
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(74, 56, 64, 0.15);
+    }
 
-.category {
-  display: inline-block;
-  margin-top: 18px;
-  background: var(--blush);
-  padding: 7px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  color: var(--pink-dark);
-  font-weight: 600;
-}
+    .modal h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
 
-/* ACTIONS */
+    .modal-subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 22px;
+    }
 
-.actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 14px;
+      margin: 15px 0 7px;
+    }
 
-.action-btn {
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--brown);
-  padding: 8px 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #fffdfb;
+      color: var(--brown);
+      border-radius: 15px;
+      padding: 13px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
 
-.action-btn:hover {
-  background: var(--blush);
-  border-color: var(--pink);
-  color: var(--pink-dark);
-}
+    textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
 
-/* MODAL */
+    textarea:focus,
+    select:focus {
+      border-color: var(--pink);
+      box-shadow: 0 0 0 3px rgba(229, 161, 181, 0.12);
+    }
 
-.modal-bg {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(74, 56, 64, 0.42);
-  z-index: 100;
-  padding: 20px;
-  overflow-y: auto;
-}
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 20px;
+    }
 
-.modal {
-  background: var(--white);
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 30px;
-  border-radius: 28px;
-  border: 1px solid var(--border);
-  box-shadow: 0 20px 60px rgba(74, 56, 64, 0.15);
-}
+    .cancel {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--brown);
+      padding: 11px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+    }
 
-.modal h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 30px;
-  color: var(--brown);
-  margin-bottom: 8px;
-}
+    .submit {
+      border: none;
+      background: var(--pink);
+      color: white;
+      padding: 11px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+    }
 
-.modal-subtitle {
-  color: var(--muted);
-  font-size: 14px;
-  margin-bottom: 22px;
-}
+    .submit:hover {
+      background: var(--pink-dark);
+    }
 
-label {
-  display: block;
-  font-weight: 600;
-  font-size: 14px;
-  margin: 15px 0 7px;
-}
+    .notice {
+      background: var(--beige);
+      border-radius: 15px;
+      padding: 13px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 15px;
+      line-height: 1.5;
+    }
 
-textarea,
-select {
-  width: 100%;
-  border: 1px solid var(--border);
-  background: #fffdfb;
-  color: var(--brown);
-  border-radius: 15px;
-  padding: 13px;
-  font-family: inherit;
-  font-size: 15px;
-  outline: none;
-}
+    /* REPLIES */
 
-textarea {
-  min-height: 180px;
-  resize: vertical;
-}
+    .replies-container {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
 
-textarea:focus,
-select:focus {
-  border-color: var(--pink);
-  box-shadow: 0 0 0 3px rgba(229, 161, 181, 0.12);
-}
+    .replies-title {
+      font-family: "Playfair Display", serif;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
 
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-}
+    .reply {
+      background: #fffafc;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 10px;
+    }
 
-.cancel {
-  border: 1px solid var(--border);
-  background: white;
-  color: var(--brown);
-  padding: 11px 18px;
-  border-radius: 25px;
-  cursor: pointer;
-}
+    .reply-anonymous {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
 
-.submit {
-  border: none;
-  background: var(--pink);
-  color: white;
-  padding: 11px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 600;
-}
+    .reply-text {
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
 
-.submit:hover {
-  background: var(--pink-dark);
-}
+    .reply-actions {
+      margin-top: 9px;
+    }
 
-/* PRIVACY NOTICE */
+    .reply-report {
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+      padding: 0;
+    }
 
-.notice {
-  background: var(--beige);
-  border-radius: 15px;
-  padding: 13px;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 15px;
-  line-height: 1.5;
-}
+    .reply-report:hover {
+      color: var(--pink-dark);
+    }
 
-/* EMPTY */
+    .empty-replies {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 5px 0;
+    }
 
-.empty {
-  text-align: center;
-  padding: 50px 20px;
-  color: var(--muted);
-}
+    .empty {
+      text-align: center;
+      padding: 50px 20px;
+      color: var(--muted);
+    }
 
-/* FOOTER */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 55px 20px;
+      font-size: 13px;
+    }
 
-footer {
-  text-align: center;
-  color: var(--muted);
-  padding: 55px 20px;
-  font-size: 13px;
-}
+    @media (max-width: 600px) {
 
-/* MOBILE */
+      header {
+        padding: 15px;
+      }
 
-@media (max-width: 600px) {
+      .logo {
+        font-size: 24px;
+      }
 
-  header {
-    padding: 15px;
-  }
+      .hero {
+        padding-top: 60px;
+      }
 
-  .logo {
-    font-size: 24px;
-  }
+      .hero h1 {
+        font-size: 44px;
+      }
 
-  .hero {
-    padding-top: 60px;
-  }
+      .post {
+        padding: 21px;
+      }
 
-  .hero h1 {
-    font-size: 44px;
-  }
-
-  .post {
-    padding: 21px;
-  }
-
-  .write-btn {
-    padding: 10px 14px;
-    font-size: 13px;
-  }
-}
+      .write-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
 <header>
+
   <div>
-   <div class="logo">spillithere.</div>
-<div class="tagline">say it. spill it. leave your name behind.</div>
+    <div class="logo">spillithere.</div>
+    <div class="tagline">
+      say it. spill it. leave your name behind.
+    </div>
   </div>
 
   <button class="write-btn" onclick="openModal()">
     Write something
   </button>
+
 </header>
 
+
 <section class="hero">
+
   <h1>You can say it here.</h1>
+
   <p>
     Thoughts you never said out loud. Stories you never got to tell.
     Share them anonymously, without needing a name.
   </p>
+
 </section>
+
 
 <main class="main">
 
-  <h2 class="section-title">Explore stories</h2>
+  <h2 class="section-title">
+    Explore stories
+  </h2>
 
   <div class="filters">
-    <button class="filter active" onclick="filterPosts('All', this)">All</button>
-    <button class="filter" onclick="filterPosts('College', this)">College</button>
-    <button class="filter" onclick="filterPosts('Friendship', this)">Friendship</button>
-    <button class="filter" onclick="filterPosts('Family', this)">Family</button>
-    <button class="filter" onclick="filterPosts('Life', this)">Life</button>
-    <button class="filter" onclick="filterPosts('Random', this)">Random</button>
+
+    <button
+      class="filter active"
+      onclick="filterPosts('All', this)">
+      All
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterPosts('College', this)">
+      College
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterPosts('Friendship', this)">
+      Friendship
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterPosts('Family', this)">
+      Family
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterPosts('Life', this)">
+      Life
+    </button>
+
+    <button
+      class="filter"
+      onclick="filterPosts('Random', this)">
+      Random
+    </button>
+
   </div>
 
   <div id="posts"></div>
 
 </main>
 
+
 <footer>
+
   Unsaid is a place to share thoughts anonymously.
+
   <br><br>
-  Please don't share passwords, addresses, phone numbers or other private information.
+
+  Please don't share passwords, addresses, phone numbers
+  or other private information.
+
 </footer>
 
 
@@ -442,17 +527,24 @@ footer {
       You don't need a name. Just say what you want to say.
     </p>
 
-    <label for="category">Category</label>
+    <label for="category">
+      Category
+    </label>
 
     <select id="category">
+
       <option value="Life">Life</option>
       <option value="College">College</option>
       <option value="Friendship">Friendship</option>
       <option value="Family">Family</option>
       <option value="Random">Random</option>
+
     </select>
 
-    <label for="story">Your story</label>
+
+    <label for="story">
+      Your story
+    </label>
 
     <textarea
       id="story"
@@ -460,18 +552,26 @@ footer {
       placeholder="Write whatever you've been carrying..."
     ></textarea>
 
+
     <div class="notice">
-      For your privacy, don't include your full name, phone number,
-      address, passwords or other identifying information.
+
+      For your privacy, don't include your full name,
+      phone number, address, passwords or other identifying information.
+
     </div>
+
 
     <div class="modal-actions">
 
-      <button class="cancel" onclick="closeModal()">
+      <button
+        class="cancel"
+        onclick="closeModal()">
         Cancel
       </button>
 
-      <button class="submit" onclick="submitStory()">
+      <button
+        class="submit"
+        onclick="submitStory()">
         Post anonymously
       </button>
 
@@ -481,186 +581,810 @@ footer {
 
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const SUPABASE_URL = "https://xsdqzzixbdktikltqpde.supabase.co";
-const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_xNIsPALwR4c-1XCJngRleQ_rpw4-Uuf";
 
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+<!-- REPLY MODAL -->
+
+<div class="modal-bg" id="replyModal">
+
+  <div class="modal">
+
+    <h2>Leave a reply.</h2>
+
+    <p class="modal-subtitle">
+      You can reply anonymously. No name required.
+    </p>
+
+    <label for="replyText">
+      Your reply
+    </label>
+
+    <textarea
+      id="replyText"
+      maxlength="2000"
+      placeholder="Write something thoughtful..."
+    ></textarea>
+
+
+    <div class="notice">
+
+      Keep replies respectful. Don't share personal information,
+      phone numbers, addresses or passwords.
+
+    </div>
+
+
+    <div class="modal-actions">
+
+      <button
+        class="cancel"
+        onclick="closeReplyModal()">
+        Cancel
+      </button>
+
+      <button
+        class="submit"
+        onclick="submitReply()">
+        Reply anonymously
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL =
+  "https://xsdqzzixbdktikltqpde.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_xNIsPALwR4c-1XCJngRleQ_rpw4-Uuf";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
 
 let currentFilter = "All";
 
-function openModal() {
-  document.getElementById("modal").style.display = "block";
-  document.body.style.overflow = "hidden";
-}
+let currentReplyPostId = null;
 
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-  document.body.style.overflow = "auto";
-}
+
+/* -----------------------------
+   ANONYMOUS ID
+----------------------------- */
 
 function generateAnonymousId() {
-  return "Anonymous #" + Math.floor(1000 + Math.random() * 9000);
+
+  return "Anonymous #" +
+    Math.floor(1000 + Math.random() * 9000);
+
 }
+
+
+/* -----------------------------
+   UUID
+----------------------------- */
+
+function generateUUID() {
+
+  if (crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
+    /[xy]/g,
+    function(c) {
+
+      const r = Math.random() * 16 | 0;
+
+      const v =
+        c === "x"
+          ? r
+          : (r & 0x3 | 0x8);
+
+      return v.toString(16);
+
+    }
+  );
+
+}
+
+
+/* -----------------------------
+   WRITE MODAL
+----------------------------- */
+
+function openModal() {
+
+  document.getElementById("modal").style.display = "block";
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeModal() {
+
+  document.getElementById("modal").style.display = "none";
+
+  document.body.style.overflow = "auto";
+
+}
+
+
+/* -----------------------------
+   REPLY MODAL
+----------------------------- */
+
+function openReplyModal(postId) {
+
+  currentReplyPostId = postId;
+
+  document.getElementById("replyText").value = "";
+
+  document.getElementById("replyModal").style.display = "block";
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeReplyModal() {
+
+  document.getElementById("replyModal").style.display = "none";
+
+  currentReplyPostId = null;
+
+  document.body.style.overflow = "auto";
+
+}
+
+
+/* -----------------------------
+   LOAD POSTS
+----------------------------- */
 
 async function renderPosts() {
-  const container = document.getElementById("posts");
 
-  let query = supabaseClient
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
-    .order("created_at", { ascending: false });
+  const container =
+    document.getElementById("posts");
+
+
+  let query =
+    supabaseClient
+      .from("posts")
+      .select("*")
+      .eq("status", "published")
+      .order("created_at", {
+        ascending: false
+      });
+
 
   if (currentFilter !== "All") {
-    query = query.eq("category", currentFilter);
+
+    query =
+      query.eq(
+        "category",
+        currentFilter
+      );
+
   }
 
-  const { data: posts, error } = await query;
+
+  const {
+    data: posts,
+    error
+  } = await query;
+
 
   if (error) {
+
     console.error(error);
+
     container.innerHTML =
       '<div class="empty">Unable to load stories.</div>';
+
     return;
+
   }
+
 
   if (!posts || posts.length === 0) {
+
     container.innerHTML =
       '<div class="empty">No stories here yet.</div>';
+
     return;
+
   }
 
-  container.innerHTML = posts.map(post => `
-    <article class="post">
 
-      <div class="anonymous">
-        ◦ ${escapeHTML(post.anonymous || "Anonymous")}
-      </div>
+  container.innerHTML =
+    posts.map(post => `
 
-      <div class="post-text">
-        ${escapeHTML(post.text || "")}
-      </div>
+      <article class="post">
 
-      <span class="category">
-        ${escapeHTML(post.category || "Random")}
-      </span>
+        <div class="anonymous">
 
-      <div class="actions">
+          ◦ ${escapeHTML(
+            post.anonymous || "Anonymous"
+          )}
 
-        <button
-          class="action-btn"
-          onclick="supportPost('${post.id}')">
-          ♡ Support
-        </button>
+        </div>
 
-        <button
-          class="action-btn"
-          onclick="reportPost('${post.id}')">
-          ⚑ Report
-        </button>
 
-      </div>
+        <div class="post-text">
 
-    </article>
-  `).join("");
+          ${escapeHTML(
+            post.text || post.content || ""
+          )}
+
+        </div>
+
+
+        <span class="category">
+
+          ${escapeHTML(
+            post.category || "Random"
+          )}
+
+        </span>
+
+
+        <div class="actions">
+
+          <button
+            class="action-btn"
+            onclick="supportPost('${post.id}')">
+
+            ♡ Support
+
+          </button>
+
+
+          <button
+            class="action-btn"
+            onclick="reportPost('${post.id}')">
+
+            ⚑ Report
+
+          </button>
+
+
+          <button
+            class="action-btn"
+            onclick="openReplyModal('${post.id}')">
+
+            💬 Reply
+
+          </button>
+
+        </div>
+
+
+        <div id="replies-${post.id}"></div>
+
+      </article>
+
+    `).join("");
+
+
+  /* Load replies for every post */
+
+  for (const post of posts) {
+
+    loadReplies(post.id);
+
+  }
+
 }
+
+
+/* -----------------------------
+   SUBMIT STORY
+----------------------------- */
 
 async function submitStory() {
-  const story = document.getElementById("story").value.trim();
-  const category = document.getElementById("category").value;
+
+  const story =
+    document
+      .getElementById("story")
+      .value
+      .trim();
+
+
+  const category =
+    document
+      .getElementById("category")
+      .value;
+
 
   if (story.length < 10) {
-    alert("Please write a little more before posting.");
+
+    alert(
+      "Please write a little more before posting."
+    );
+
     return;
+
   }
 
-  const { error } = await supabaseClient
-    .from("posts")
-.insert({
-  content: story,
-  text: story,
-  category: category,
-  anonymous: generateAnonymousId(),
-  status: "published"
-});
+
+  const { error } =
+    await supabaseClient
+      .from("posts")
+      .insert({
+
+        content: story,
+
+        text: story,
+
+        category: category,
+
+        anonymous: generateAnonymousId(),
+
+        status: "published"
+
+      });
+
 
   if (error) {
+
     console.error(error);
-    alert("Something went wrong. Please try again.");
+
+    alert(
+      "Something went wrong. Please try again."
+    );
+
     return;
+
   }
 
+
   document.getElementById("story").value = "";
+
   closeModal();
 
-  alert("Your story has been posted anonymously.");
+
+  alert(
+    "Your story has been posted anonymously."
+  );
+
 
   renderPosts();
+
 }
+
+
+/* -----------------------------
+   SUBMIT REPLY
+----------------------------- */
+
+async function submitReply() {
+
+  const replyText =
+    document
+      .getElementById("replyText")
+      .value
+      .trim();
+
+
+  if (!currentReplyPostId) {
+
+    alert(
+      "Something went wrong. Please try again."
+    );
+
+    return;
+
+  }
+
+
+  if (replyText.length < 2) {
+
+    alert(
+      "Please write something before replying."
+    );
+
+    return;
+
+  }
+
+
+  /* Get parent post category */
+
+  const {
+    data: post,
+    error: postError
+  } = await supabaseClient
+    .from("posts")
+    .select("category")
+    .eq("id", currentReplyPostId)
+    .single();
+
+
+  if (postError) {
+
+    console.error(postError);
+
+    alert(
+      "Unable to find this story."
+    );
+
+    return;
+
+  }
+
+
+  const replyId =
+    generateUUID();
+
+
+  const anonymousName =
+    generateAnonymousId();
+
+
+  const { error } =
+    await supabaseClient
+      .from("replies")
+      .insert({
+
+        id: replyId,
+
+        post_id: currentReplyPostId,
+
+        text: replyText,
+
+        content: replyText,
+
+        status: "published",
+
+        report: null,
+
+        anonymous: anonymousName,
+
+        category: post.category || "Random"
+
+      });
+
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "Unable to post reply. Please try again."
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById("replyText").value = "";
+
+  const postId =
+    currentReplyPostId;
+
+  closeReplyModal();
+
+
+  alert(
+    "Your reply was posted anonymously. 💗"
+  );
+
+
+  loadReplies(postId);
+
+}
+
+
+/* -----------------------------
+   LOAD REPLIES
+----------------------------- */
+
+async function loadReplies(postId) {
+
+  const container =
+    document.getElementById(
+      `replies-${postId}`
+    );
+
+
+  if (!container) return;
+
+
+  const {
+    data: replies,
+    error
+  } = await supabaseClient
+    .from("replies")
+    .select("*")
+    .eq("post_id", postId)
+    .eq("status", "published")
+    .order("created_at", {
+      ascending: true
+    });
+
+
+  if (error) {
+
+    console.error(
+      "Reply loading error:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  if (!replies || replies.length === 0) {
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+
+  container.innerHTML = `
+
+    <div class="replies-container">
+
+      <div class="replies-title">
+
+        💬 Replies
+
+      </div>
+
+
+      ${replies.map(reply => `
+
+        <div class="reply">
+
+          <div class="reply-anonymous">
+
+            ◦ ${escapeHTML(
+              reply.anonymous || "Anonymous"
+            )}
+
+          </div>
+
+
+          <div class="reply-text">
+
+            ${escapeHTML(
+              reply.text || reply.content || ""
+            )}
+
+          </div>
+
+
+          <div class="reply-actions">
+
+            <button
+              class="reply-report"
+              onclick="reportReply('${reply.id}')">
+
+              ⚑ Report reply
+
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+  `;
+
+}
+
+
+/* -----------------------------
+   SUPPORT
+----------------------------- */
 
 function supportPost(id) {
-  alert("♡ Your support was sent anonymously.");
+
+  alert(
+    "♡ Your support was sent anonymously."
+  );
+
 }
 
+
+/* -----------------------------
+   REPORT POST
+----------------------------- */
+
 async function reportPost(id) {
-  const reason = prompt(
-    "Why are you reporting this story?\n\n" +
-    "1. Spam\n" +
-    "2. Harassment\n" +
-    "3. Personal information\n" +
-    "4. Inappropriate content\n" +
-    "5. Other"
-  );
+
+  const reason =
+    prompt(
+      "Why are you reporting this story?\n\n" +
+      "1. Spam\n" +
+      "2. Harassment\n" +
+      "3. Personal information\n" +
+      "4. Inappropriate content\n" +
+      "5. Other"
+    );
+
 
   if (!reason) return;
 
-  const { error } = await supabaseClient
-    .from("posts")
-    .update({ report: reason })
-    .eq("id", id);
+
+  const { error } =
+    await supabaseClient
+      .from("posts")
+      .update({
+        report: reason
+      })
+      .eq("id", id);
+
 
   if (error) {
+
     console.error(error);
-    alert("Unable to submit report.");
+
+    alert(
+      "Unable to submit report."
+    );
+
     return;
+
   }
 
-  alert("Thank you. Your report has been recorded.");
+
+  alert(
+    "Thank you. Your report has been recorded."
+  );
+
 }
 
-function filterPosts(category, button) {
+
+/* -----------------------------
+   REPORT REPLY
+----------------------------- */
+
+async function reportReply(replyId) {
+
+  const reason =
+    prompt(
+      "Why are you reporting this reply?\n\n" +
+      "1. Spam\n" +
+      "2. Harassment\n" +
+      "3. Personal information\n" +
+      "4. Inappropriate content\n" +
+      "5. Other"
+    );
+
+
+  if (!reason) return;
+
+
+  const { error } =
+    await supabaseClient
+      .from("replies")
+      .update({
+        report: reason
+      })
+      .eq("id", replyId);
+
+
+  if (error) {
+
+    console.error(error);
+
+    alert(
+      "Unable to submit report."
+    );
+
+    return;
+
+  }
+
+
+  alert(
+    "Thank you. The reply has been reported."
+  );
+
+}
+
+
+/* -----------------------------
+   FILTER
+----------------------------- */
+
+function filterPosts(
+  category,
+  button
+) {
+
   currentFilter = category;
+
 
   document
     .querySelectorAll(".filter")
-    .forEach(btn => btn.classList.remove("active"));
+    .forEach(btn =>
+      btn.classList.remove("active")
+    );
+
 
   button.classList.add("active");
 
+
   renderPosts();
+
 }
+
+
+/* -----------------------------
+   SECURITY
+----------------------------- */
 
 function escapeHTML(text) {
-  const div = document.createElement("div");
-  div.textContent = text;
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text;
+
   return div.innerHTML;
+
 }
 
-window.onclick = function(event) {
-  const modal = document.getElementById("modal");
 
-  if (event.target === modal) {
-    closeModal();
-  }
-};
+/* -----------------------------
+   CLOSE MODALS
+----------------------------- */
+
+window.onclick =
+  function(event) {
+
+    const storyModal =
+      document.getElementById("modal");
+
+    const replyModal =
+      document.getElementById("replyModal");
+
+
+    if (event.target === storyModal) {
+
+      closeModal();
+
+    }
+
+
+    if (event.target === replyModal) {
+
+      closeReplyModal();
+
+    }
+
+  };
+
+
+/* -----------------------------
+   START
+----------------------------- */
 
 renderPosts();
+
 </script>
 
 </body>
 </html>
+```
