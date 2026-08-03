@@ -603,7 +603,11 @@
       maxlength="2000"
       placeholder="Write something thoughtful..."
     ></textarea>
-
+<button
+  type="button"
+  onclick="sendReply()">
+  Send Reply
+</button>
 
     <div class="notice">
 
@@ -725,6 +729,45 @@ function closeModal() {
 ----------------------------- */
 
 function openReplyModal(postId) {
+  let currentReplyPostId = null;
+
+async function sendReply() {
+
+  const text = document.getElementById("replyText").value.trim();
+
+  if (!text) {
+    alert("Please write a reply.");
+    return;
+  }
+
+  if (!currentReplyPostId) {
+    alert("Post ID missing.");
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("replies")
+    .insert({
+      post_id: currentReplyPostId,
+      anonymous: "Anonymous",
+      text: text,
+      status: "published"
+    });
+
+  if (error) {
+    console.error("Reply error:", error);
+    alert("Unable to send reply: " + error.message);
+    return;
+  }
+
+  document.getElementById("replyText").value = "";
+
+  closeReplyModal();
+
+  await renderPosts();
+
+  alert("Reply posted 💗");
+}
 
   currentReplyPostId = postId;
 
